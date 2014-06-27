@@ -1,0 +1,4 @@
+
+Sitemap: http://putrats.com/sitemap.xml
+Crawl-delay: 100
+Host: http://putrats.com/

@@ -1,0 +1,10 @@
+{
+    "id":       8,
+    "title":    "Scrum",
+    "image":    "/images/scrum.png",
+    "desc":     "Scrum im theory: Backlog - Ready - Process - Done. In practice: Never-Never land - Should be done - Delayed - Fuck it, ship it.",
+    "width":    500,
+    "height":   848,
+    "imgtitle": "We can't invest in sticky notes right now. Write on back of the old ones.",
+    "share":    "Scrum in theory and practice"
+}

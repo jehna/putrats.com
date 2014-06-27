@@ -1,0 +1,10 @@
+{
+    "id":       4,
+    "title":    "Time",
+    "image":    "/images/time.png",
+    "desc":     "Time. Time is a mystical thing, especially if you're a developer. Because time, for one thing, is not constant. There are leap seconds (that occur twice), not to mention about daylight savings time (the whole HOUR appears twice). MANY different standards ... and formats. \"Local\" time. So of you're a developer, you know time will always hunt you. 'Till the end.",
+    "width":    736,
+    "height":   4064,
+    "imgtitle": "More precisely, the year 292,277,026,596 - when our clocks will run out of time.",
+    "share":    "Time"
+}

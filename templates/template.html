@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Putrats - <%- title %></title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="canonical" href="<%- siteurl %>comics/<%- id %>" />
+    <link rel="first" href="/comics/1" />
+    <% if(!isLast) { %><link rel="next" href="/comics/<%- id+1 %>" /><% } %>
+    <% if(!isFirst) { %><link rel="prev" href="/comics/<%- id-1 %>" /><% } %>
+    <link rel="last" href="/comics/<%- lastid %>" />
+    <meta name="viewport" content="initial-scale=1.0, minimun-scale=1.0, width=device-width" />
+    <meta name="description" content="<%- desc %>" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+    <!-- Feeds -->
+    <link rel="alternate" type="application/rss+xml" href="http://feed43.com/4824306380765877.xml" />
+    
+    <!-- FB -->
+    <meta name="og:image" content="<%- siteurl %><%- image.substr(1) %>" />
+    <meta name="og:decscription" content="<%- share %>" />
+    <meta property="fb:admins" content="100000475343767" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:creator" content="@luotojesse">
+    <meta name="twitter:title" content="<%- title %>">
+    <meta name="twitter:image" content="<%- siteurl %><%- image.substr(1) %>">
+    <meta name="twitter:image:width" content="<%- width %>">
+    <meta name="twitter:image:height" content="<%- height %>">
+</head>
+<body>
+    <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/" class="navbar-brand">
+            <strong>Putrats</strong> &ndash;
+            <small>Webcomic about web development and startups</small>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+        <div class="first-pagination">
+            <ul class="pager">
+                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/comics/1" rel="first"<% } %>><span class="glyphicon glyphicon-step-backward"></span> First</a></li>
+                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/comics/<%- id-1 %>" rel="prev"<% } %>><span class="glyphicon glyphicon-chevron-left"></span> Prev</a></li>
+                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/comics/<%- id+1 %>" rel="next"<% } %>>Next <span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/comics/<%- lastid %>" rel="last"<% } %>>Last <span class="glyphicon glyphicon-step-forward"></span></a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1><%- title %></h1>
+                    <img src="<%- image %>" class="img-responsive" title="<%- imgtitle %>" width="<%- width %>" height="<%- height %>" alt="<%- desc %>" />
+                    <p>
+                        Permanent link to this comic: <a href="<%= siteurl %>comics/<%= id %>" rel="canonical"><%- siteurl %>comics/<%- id %></a><br />
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-url="<%- siteurl %>comics/<%- id %>" data-text="<%- share %>" data-hashtags="webcomic">Tweet</a><br />
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="last-pagination">
+            <ul class="pager">
+                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/comics/1" rel="first"<% } %>><span class="glyphicon glyphicon-step-backward"></span> First</a></li>
+                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/comics/<%- id-1 %>" rel="prev"<% } %>><span class="glyphicon glyphicon-chevron-left"></span> Prev</a></li>
+                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/comics/<%- id+1 %>" rel="next"<% } %>>Next <span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/comics/<%- lastid %>" rel="last"<% } %>>Last <span class="glyphicon glyphicon-step-forward"></span></a></li>
+            </ul>
+        </div>
+        <footer>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Webcomic by <a href="https://www.twitter.com/luotojesse">Jesse Luoto.</a></p>
+                    <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc/2.5/" rel="nofollow">Creative Commons Attribution-NonCommercial 2.5 License.</a></p>
+                    <p>Theme <a href="http://bootswatch.com/superhero/" rel="nofollow">Superhero</a> is based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    
+    <!-- GA -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+        ga('create', 'UA-31498696-2', window.location.hostname);
+        ga('send', 'pageview');
+    </script>
+    
+    <!-- Twitter -->
+    <script>
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+    </script>
+</body>
+</html>

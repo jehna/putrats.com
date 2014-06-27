@@ -1,0 +1,10 @@
+{
+    "id":       10,
+    "title":    "Back to Basics",
+    "image":    "/images/backtobasics.png",
+    "desc":     "What responsive grids are getting wrong: We are currently hating tables only, because the people from Web 2.0 times are currently lead developers. Next time use tables. You might make someone cry.",
+    "width":    500,
+    "height":   2300,
+    "imgtitle": "Does AngularJS work with framesets?",
+    "share":    "What responsive grids are getting wrong #CSS3 #HTML5"
+}

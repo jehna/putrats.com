@@ -3,11 +3,11 @@
 <head>
     <title>Putrats - <%- title %></title>
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="canonical" href="<%- siteurl %>comics/<%- id %>" />
-    <link rel="first" href="/comics/1" />
-    <% if(!isLast) { %><link rel="next" href="/comics/<%- id+1 %>" /><% } %>
-    <% if(!isFirst) { %><link rel="prev" href="/comics/<%- id-1 %>" /><% } %>
-    <link rel="last" href="/comics/<%- lastid %>" />
+    <link rel="canonical" href="<%- siteurl %><%= folder %>/<%- id %>" />
+    <link rel="first" href="/<%= folder %>/1" />
+    <% if(!isLast) { %><link rel="next" href="/<%= folder %>/<%- id+1 %>" /><% } %>
+    <% if(!isFirst) { %><link rel="prev" href="/<%= folder %>/<%- id-1 %>" /><% } %>
+    <link rel="last" href="/<%= folder %>/<%- lastid %>" />
     <meta name="viewport" content="initial-scale=1.0, minimun-scale=1.0, width=device-width" />
     <meta name="description" content="<%- desc %>" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -28,7 +28,7 @@
     <meta name="twitter:image:width" content="<%- width %>">
     <meta name="twitter:image:height" content="<%- height %>">
 </head>
-<body>
+<body class="<%= folder %>">
     <div class="navbar navbar-default">
       <div class="container">
         <div class="navbar-header">
@@ -43,10 +43,10 @@
     <div class="container">
         <div class="first-pagination">
             <ul class="pager">
-                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/comics/1" rel="first"<% } %>><span class="glyphicon glyphicon-step-backward"></span> First</a></li>
-                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/comics/<%- id-1 %>" rel="prev"<% } %>><span class="glyphicon glyphicon-chevron-left"></span> Prev</a></li>
-                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/comics/<%- id+1 %>" rel="next"<% } %>>Next <span class="glyphicon glyphicon-chevron-right"></span></a></li>
-                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/comics/<%- lastid %>" rel="last"<% } %>>Last <span class="glyphicon glyphicon-step-forward"></span></a></li>
+                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/<%= folder %>/1" rel="first"<% } %>><span class="glyphicon glyphicon-step-backward"></span> First</a></li>
+                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/<%= folder %>/<%- id-1 %>" rel="prev"<% } %>><span class="glyphicon glyphicon-chevron-left"></span> Prev</a></li>
+                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/<%= folder %>/<%- id+1 %>" rel="next"<% } %>>Next <span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/<%= folder %>/<%- lastid %>" rel="last"<% } %>>Last <span class="glyphicon glyphicon-step-forward"></span></a></li>
             </ul>
         </div>
         <div class="content">
@@ -54,30 +54,41 @@
                 <div class="col-lg-12">
                     <h1><%- title %></h1>
                     <img src="<%- image %>" class="header-image img-responsive" title="<%- imgtitle %>" width="<%- width %>" height="<%- height %>" alt="<%- desc %>" />
-                    <% if(blogPost) { %>
-                        <div class="blog">
+                    <% if(isBlogPost) { %>
+                        <div class="blog-post">
                             <%= blogPost %>
                         </div>
                     <% }; %>
-                    <p>
-                        Permanent link to this comic: <a href="<%= siteurl %>comics/<%= id %>" rel="canonical"><%- siteurl %>comics/<%- id %></a><br />
-                        <a href="https://twitter.com/share" class="twitter-share-button" data-url="<%- siteurl %>comics/<%- id %>" data-text="<%- share %>" data-hashtags="webcomic">Tweet</a><br />
+                    <p class="post-cta">
+                        Permanent link to this <% if(isBlogPost) { %>post<% } else { %>comic<% };%>: <a href="<%= siteurl %><%= folder %>/<%= id %>" rel="canonical"><%- siteurl %><%= folder %>/<%- id %></a><br />
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-url="<%- siteurl %><%= folder %>/<%- id %>" data-text="<%- share %>" data-hashtags="webcomic">Tweet</a><br />
                     </p>
                 </div>
             </div>
         </div>
         <div class="last-pagination">
             <ul class="pager">
-                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/comics/1" rel="first"<% } %>><span class="glyphicon glyphicon-step-backward"></span> First</a></li>
-                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/comics/<%- id-1 %>" rel="prev"<% } %>><span class="glyphicon glyphicon-chevron-left"></span> Prev</a></li>
-                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/comics/<%- id+1 %>" rel="next"<% } %>>Next <span class="glyphicon glyphicon-chevron-right"></span></a></li>
-                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/comics/<%- lastid %>" rel="last"<% } %>>Last <span class="glyphicon glyphicon-step-forward"></span></a></li>
+                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/<%= folder %>/1" rel="first"<% } %>><span class="glyphicon glyphicon-step-backward"></span> First</a></li>
+                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/<%= folder %>/<%- id-1 %>" rel="prev"<% } %>><span class="glyphicon glyphicon-chevron-left"></span> Prev</a></li>
+                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/<%= folder %>/<%- id+1 %>" rel="next"<% } %>>Next <span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/<%= folder %>/<%- lastid %>" rel="last"<% } %>>Last <span class="glyphicon glyphicon-step-forward"></span></a></li>
             </ul>
         </div>
+        
+        
         <footer>
             <div class="row">
                 <div class="col-md-12">
-                    <p>Webcomic by <a href="https://www.twitter.com/luotojesse">Jesse Luoto.</a></p>
+                    
+                    <ul class="list-unstyled">
+                      <li class="pull-right"><a href="#">Back to top</a></li>
+                      <li><a href="/blog">Blog</a></li>
+                      <li><a href="/comics">Webcomic</a></li>
+                      <li><a href="http://feed43.com/4824306380765877.xml">RSS</a></li>
+                      <li><a href="https://github.com/jehna/grunt-gae-bootstrap-webcomic" rel="nofollow">Fork!</a></li>
+                    </ul>
+                    
+                    <p>Site by <a href="https://www.twitter.com/luotojesse">Jesse Luoto.</a></p>
                     <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc/2.5/" rel="nofollow">Creative Commons Attribution-NonCommercial 2.5 License.</a></p>
                     <p>Code licensed under a MIT license and can be forked at <a href="https://github.com/jehna/grunt-gae-bootstrap-webcomic" rel="nofollow">GitHub project page</a>.</p>
                     <p>Theme <a href="http://bootswatch.com/cosmo/" rel="nofollow">Cosmo</a> is based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p></p>

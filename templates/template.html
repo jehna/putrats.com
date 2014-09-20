@@ -54,6 +54,11 @@
                 <div class="col-lg-12">
                     <h1><%- title %></h1>
                     <img src="<%- image %>" class="header-image img-responsive" title="<%- imgtitle %>" width="<%- width %>" height="<%- height %>" alt="<%- desc %>" />
+                    <% if(blogPost) { %>
+                        <div class="blog">
+                            <%= blogPost %>
+                        </div>
+                    <% }; %>
                     <p>
                         Permanent link to this comic: <a href="<%= siteurl %>comics/<%= id %>" rel="canonical"><%- siteurl %>comics/<%- id %></a><br />
                         <a href="https://twitter.com/share" class="twitter-share-button" data-url="<%- siteurl %>comics/<%- id %>" data-text="<%- share %>" data-hashtags="webcomic">Tweet</a><br />

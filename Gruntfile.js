@@ -1,3 +1,5 @@
+var markdown = require( "markdown" ).markdown;
+
 module.exports = function(grunt) {
 
     // Project configuration.
@@ -118,6 +120,14 @@ module.exports = function(grunt) {
             conf.isLast = (i == a.length-1);
             conf.siteurl = pkg.homepage;
             conf.lastid = a[a.length-1].id;
+            conf.blogPost = false;
+            
+            var mdFileName = "src/markdown/" + conf.id + ".md";
+            if (grunt.file.exists(mdFileName)) {
+                conf.blogPost = markdown.toHTML(
+                    grunt.file.read(mdFileName)
+                )
+            }
             
             var filename = "static/comics/" + conf.id + "/index.html";
             var files = {}

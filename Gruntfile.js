@@ -11,16 +11,16 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            scripts: {
+            less: {
                 files: ['src/**/*.less'],
-                tasks: ['less', 'uncss', 'cssmin'],
+                tasks: ['less', /*'uncss', 'cssmin'*/],
                 options: {
                   spawn: false,
                 },
             },
             templates: {
-                files: ['templates/*.html', 'comics/*.json'],
-                tasks: ['build'],
+                files: ['templates/*.html', 'comics/*.json', 'src/blog/*.json', 'src/markdown/*.md'],
+                tasks: ['markdown', 'build', /*'uncss', 'cssmin', */'clean'],
                 options: {
                   spawn: false,
                 },
@@ -89,8 +89,42 @@ module.exports = function(grunt) {
                     }
                 ]
             }
+        },     
+        highlight: {
+            task: {
+                options: {
+                    selector: "code"
+                },
+                files: [{
+                    expand: true,     // Enable dynamic expansion.
+                    cwd: 'static/',      // Src matches are relative to this path.
+                    src: ['*.html', '**/*.html'], // Actual pattern(s) to match.
+                    dest: 'static/',   // Destination path prefix.
+                    //ext: '.min.js',   // Dest filepaths will have this extension.
+                    //extDot: 'first'   // Extensions in filenames begin after the first dot
+                }],
+            }
         },
-        template: {}
+        template: {},
+        markdown: {
+            all: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/markdown',
+                    src: '*.md',
+                    dest: 'tmp/markdown/',
+                    ext: '.html'
+                }],
+                options: {
+                    template: 'templates/empty.tpl',
+                    markdownOptions: {
+                        gfm: true,
+                        highlight: 'manual'
+                    }
+                }
+            }
+        },
+        clean: ['tmp/']
     });
   
     grunt.loadNpmTasks('grunt-contrib-less');
@@ -102,37 +136,66 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-sitemap');
     grunt.loadNpmTasks('grunt-robots-txt');
+    grunt.loadNpmTasks('grunt-markdown');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     
     grunt.registerTask('build', 'build all files', function() {
         var pkg = grunt.file.readJSON('package.json');
         
-        grunt.file.expand("comics/*.json")
-        .map(function(file) {
-            return grunt.file.readJSON(file);
-        })
-        .sort(function(a,b) {
-            return a.id > b.id ? 1 : -1;
-        })
-        .forEach(function(conf,i,a) {
-            conf.isFirst = (i == 0);
-            conf.isLast = (i == a.length-1);
-            conf.siteurl = pkg.homepage;
-            conf.lastid = a[a.length-1].id;
+        function compileFolder(expandFolder) {
             
-            var filename = "static/comics/" + conf.id + "/index.html";
-            var files = {}
-            files[filename] = ['templates/template.html'];
+            grunt.file.expand(expandFolder)
+            .map(function(file) {
+                conf = grunt.file.readJSON(file);
+                conf.isBlogPost = (file.indexOf("blog") > -1);
+                return conf;
+            })
+            .sort(function(a,b) {
+                return a.id > b.id ? 1 : -1;
+            })
+            .forEach(function(conf,i,a) {
+                conf.isFirst = (i == 0);
+                conf.isLast = (i == a.length-1);
+                conf.siteurl = pkg.homepage;
+                conf.lastid = a[a.length-1].id;
+                conf.blogPost = false;
+                conf.folder = (conf.isBlogPost == true) ? "blog" : "comics";
+                
+                if (conf.isBlogPost) {
+                    var compiledMdFileName = "tmp/markdown/" + conf.id + ".html";
+                    if(grunt.file.exists(compiledMdFileName)) {
+                        conf.blogPost = grunt.file.read(compiledMdFileName)
+                    }
+                }
+                
+                
+                var filename = "static/" + conf.folder + "/" + conf.id + "/index.html";
+                var files = {}
+                files[filename] = ['templates/template.html'];
+                
+                grunt.config('template.'+conf.folder + conf.id+'.options.data', conf);
+                grunt.config('template.'+conf.folder + conf.id+'.files', files);
+                
+                
+                if (conf.isLast) {
+                    var lastFolderFile = {}
+                    lastFolderFile["static/" + conf.folder + "/index.html"] = ['templates/template.html'];
+                    
+                    grunt.config('template.last'+conf.folder+'.options.data', conf);
+                    grunt.config('template.last'+conf.folder+'.files', lastFolderFile);
+                    
+                    if (conf.isBlogPost) {
+                        var lastFile = {"static/index.html": ['templates/template.html']}
+                        grunt.config('template.last.options.data', conf);
+                        grunt.config('template.last.files', lastFile);
+                    }
+                }
+            });
             
-            grunt.config('template.'+conf.id+'.options.data', conf);
-            grunt.config('template.'+conf.id+'.files', files);
-            
-            
-            if (conf.isLast) {
-                var lastFile = {"static/index.html": ['templates/template.html']}
-                grunt.config('template.last.options.data', conf);
-                grunt.config('template.last.files', lastFile);
-            }
-        });
+        }
+        
+        compileFolder("comics/*.json");
+        compileFolder("src/blog/*.json");
         
         grunt.task.run(['template']);
         grunt.task.run(['htmlmin']);
@@ -140,7 +203,8 @@ module.exports = function(grunt) {
         grunt.task.run(['robotstxt']);
     });
     
-    // Default task(s).
-    grunt.registerTask('default', ['less', 'uncss', 'cssmin', 'build', 'imagemin', 'watch']);
+    
+    grunt.registerTask('default', ['less', 'markdown', 'build', 'clean', 'watch']);
+    grunt.registerTask('deploy', ['less', 'markdown', 'build', 'uncss', 'cssmin', 'imagemin', 'clean']);
 
 };

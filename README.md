@@ -64,3 +64,5 @@ The compiled .html files will be compiled to `static/comics/[id]/index.html`
 The code in this project (including Bootstrap and Bootswatch theme) is licensed under MIT license (see LICENSE-MIT file).
 
 The content (comics, comic images, texts in `comics/*.json` files) is licensed under a Creative Commons Attribution-NonCommercial 2.5 License (see LICENSE-CC file).
+
+Code styles are licensed under BSD license (see src/less/highlight.js-styles/LICESNSE-BSD file).

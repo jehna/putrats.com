@@ -1,5 +1,3 @@
-var markdown = require( "markdown" ).markdown;
-
 module.exports = function(grunt) {
 
     // Project configuration.
@@ -13,16 +11,16 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            scripts: {
+            less: {
                 files: ['src/**/*.less'],
-                tasks: ['less', 'uncss', 'cssmin'],
+                tasks: ['less', /*'uncss', 'cssmin'*/],
                 options: {
                   spawn: false,
                 },
             },
             templates: {
                 files: ['templates/*.html', 'comics/*.json', 'src/blog/*.json', 'src/markdown/*.md'],
-                tasks: ['build'],
+                tasks: ['markdown', 'build', /*'uncss', 'cssmin', */'clean'],
                 options: {
                   spawn: false,
                 },
@@ -91,8 +89,42 @@ module.exports = function(grunt) {
                     }
                 ]
             }
+        },     
+        highlight: {
+            task: {
+                options: {
+                    selector: "code"
+                },
+                files: [{
+                    expand: true,     // Enable dynamic expansion.
+                    cwd: 'static/',      // Src matches are relative to this path.
+                    src: ['*.html', '**/*.html'], // Actual pattern(s) to match.
+                    dest: 'static/',   // Destination path prefix.
+                    //ext: '.min.js',   // Dest filepaths will have this extension.
+                    //extDot: 'first'   // Extensions in filenames begin after the first dot
+                }],
+            }
         },
-        template: {}
+        template: {},
+        markdown: {
+            all: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/markdown',
+                    src: '*.md',
+                    dest: 'tmp/markdown/',
+                    ext: '.html'
+                }],
+                options: {
+                    template: 'templates/empty.tpl',
+                    markdownOptions: {
+                        gfm: true,
+                        highlight: 'manual'
+                    }
+                }
+            }
+        },
+        clean: ['tmp/']
     });
   
     grunt.loadNpmTasks('grunt-contrib-less');
@@ -104,6 +136,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-sitemap');
     grunt.loadNpmTasks('grunt-robots-txt');
+    grunt.loadNpmTasks('grunt-markdown');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     
     grunt.registerTask('build', 'build all files', function() {
         var pkg = grunt.file.readJSON('package.json');
@@ -128,11 +162,9 @@ module.exports = function(grunt) {
                 conf.folder = (conf.isBlogPost == true) ? "blog" : "comics";
                 
                 if (conf.isBlogPost) {
-                    var mdFileName = "src/markdown/" + conf.id + ".md";
-                    if(grunt.file.exists(mdFileName)) {
-                        conf.blogPost = markdown.toHTML(
-                            grunt.file.read(mdFileName)
-                        )
+                    var compiledMdFileName = "tmp/markdown/" + conf.id + ".html";
+                    if(grunt.file.exists(compiledMdFileName)) {
+                        conf.blogPost = grunt.file.read(compiledMdFileName)
                     }
                 }
                 
@@ -171,7 +203,8 @@ module.exports = function(grunt) {
         grunt.task.run(['robotstxt']);
     });
     
-    // Default task(s).
-    grunt.registerTask('default', ['less', 'uncss', 'cssmin', 'build', 'imagemin', 'watch']);
+    
+    grunt.registerTask('default', ['less', 'markdown', 'build', 'clean', 'watch']);
+    grunt.registerTask('deploy', ['less', 'markdown', 'build', 'uncss', 'cssmin', 'imagemin', 'clean']);
 
 };

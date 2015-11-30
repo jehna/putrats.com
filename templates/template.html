@@ -101,7 +101,7 @@
     <!-- GA -->
     <script>
         window.addEventListener("load", function() {
-            var s=screen,d=document,l=localStorage,i=new Image;
+            var s=screen,d=document,l=localStorage,i=new XMLHttpRequest();
             var url = "http://www.google-analytics.com/collect?" + 
                       "uid=" + (l.uid = l.uid || Math.random()+"."+Math.random())+
                       "&v=1"+
@@ -116,7 +116,8 @@
                       "&vp="+innerWidth+"x"+innerHeight+
                       "&z="+new Date().getTime();
             window.addEventListener("unload", function() {
-                i.src = url;
+                i.open("GET", url, false)
+                i.send();
             });
         });
     </script>

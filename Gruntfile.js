@@ -20,7 +20,7 @@ module.exports = function(grunt) {
             },
             templates: {
                 files: ['templates/*.html', 'comics/*.json', 'src/blog/*.json', 'src/markdown/*.md'],
-                tasks: ['markdown', 'build', /*'uncss', 'cssmin', */'clean'],
+                tasks: ['markdown', 'build', /*'uncss', 'cssmin', */'clean:tmp'],
                 options: {
                   spawn: false,
                 },
@@ -124,7 +124,22 @@ module.exports = function(grunt) {
                 }
             }
         },
-        clean: ['tmp/']
+        replace: {
+            inlineCss: {
+                src: ['static/**/*.html'],
+                overwrite: true,
+                replacements: [{
+                    from: '<link rel="stylesheet" href="/css/style.css">',
+                    to: function() {
+                        return '<style>' + grunt.file.read('static/css/style.css') + '</style>';
+                    }
+                }]
+            }
+        },
+        clean: {
+            tmp: ['tmp/'],
+            css: ['static/css']
+        } 
     });
   
     grunt.loadNpmTasks('grunt-contrib-less');
@@ -138,6 +153,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-robots-txt');
     grunt.loadNpmTasks('grunt-markdown');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-text-replace');
     
     grunt.registerTask('build', 'build all files', function() {
         var pkg = grunt.file.readJSON('package.json');
@@ -204,7 +220,7 @@ module.exports = function(grunt) {
     });
     
     
-    grunt.registerTask('default', ['less', 'markdown', 'build', 'clean', 'watch']);
-    grunt.registerTask('deploy', ['less', 'markdown', 'build', 'uncss', 'cssmin', 'imagemin', 'clean']);
+    grunt.registerTask('default', ['less', 'markdown', 'build', 'clean:tmp', 'watch']);
+    grunt.registerTask('deploy', ['less', 'markdown', 'build', 'uncss', 'cssmin', 'imagemin', 'replace', 'clean']);
 
 };

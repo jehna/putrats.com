@@ -124,6 +124,19 @@ module.exports = function(grunt) {
                 }
             }
         },
+        font_optimizer: {
+            default: {
+                options: {
+                    // Characters to include
+                    chars: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_:;.,–',
+                    // Features to include.
+                    includeFeatures: ['kern']
+                },
+                files: {
+                    'static/fonts/': ['src/fonts/*.ttf'],
+                },
+            },
+        },
         replace: {
             inlineCss: {
                 src: ['static/**/*.html'],
@@ -154,6 +167,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-markdown');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-text-replace');
+    grunt.loadNpmTasks('grunt-font-optimizer');
     
     grunt.registerTask('build', 'build all files', function() {
         var pkg = grunt.file.readJSON('package.json');
@@ -220,7 +234,7 @@ module.exports = function(grunt) {
     });
     
     
-    grunt.registerTask('default', ['less', 'markdown', 'build', 'clean:tmp', 'watch']);
-    grunt.registerTask('deploy', ['less', 'markdown', 'build', 'uncss', 'cssmin', 'imagemin', 'replace', 'clean']);
+    grunt.registerTask('default', ['less', 'markdown', 'build', 'clean:tmp', 'font_optimizer', 'watch']);
+    grunt.registerTask('deploy', ['less', 'markdown', 'build', 'uncss', 'cssmin', 'imagemin', 'replace', 'font_optimizer', 'clean']);
 
 };

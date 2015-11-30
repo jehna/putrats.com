@@ -17,6 +17,7 @@
     "grunt-contrib-imagemin": "~0.7.1",
     "grunt-contrib-less": "~0.11.1",
     "grunt-contrib-watch": "~0.6.1",
+    "grunt-font-optimizer": "^0.2.8",
     "grunt-html-minify": "~0.3.1",
     "grunt-markdown": "~0.6.1",
     "grunt-robots-txt": "~0.3.0",

@@ -116,8 +116,12 @@
                       "&vp="+innerWidth+"x"+innerHeight+
                       "&z="+new Date().getTime();
             window.addEventListener("unload", function() {
-                i.open("GET", url, false)
-                i.send();
+                if(navigator.sendBeacon) {
+                    navigator.sendBeacon(url);
+                } else {
+                    i.open("GET", url, false)
+                    i.send();
+                }
             });
         });
     </script>

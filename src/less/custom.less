@@ -1,34 +1,15 @@
-@font-face {
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 300;
-  src: url('/fonts/sourcesanspro-light.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 400;
-  src: url('/fonts/sourcesanspro-regular.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 700;
-  src: url('/fonts/sourcesanspro-bold.ttf') format('truetype');
-}
-
 .content {
     padding-bottom: 2.3em;
-    
+
     h1 {
         text-align: center;
     }
-    
+
     img {
         margin: 0 auto;
         display: block;
     }
-    
+
     .post-cta {
         text-align: center;
         margin-top: 2em;
@@ -47,39 +28,39 @@
 .blog {
     .container {
         max-width: 690px;
-        
+
         .blog-post {
             font-size: 20px;
             line-height: 1.4em;
-            
+
             & > p {
                 margin-top: 1.5em;
+                font-family: "Lucida Sans Unicode", "Lucida Grande";
+                letter-spacing: -0.01em;
             }
-            
+
             img {
                 max-width: 100%;
                 height: auto;
             }
-            
+
             h2 {
                 line-height: 1.09em;
                 margin-top: 1.25em;
-                font-weight: 400;
                 text-align: center;
                 font-size: 1.8em;
             }
-            
+
             h3 {
                 line-height: 1.09em;
                 margin-top: 1.25em;
-                font-weight: 100;
                 text-align: center;
                 font-size: 1.4em;
                 color: #555;
             }
         }
     }
-    
+
     p > code {
         padding: 0;
         padding-top: 0.2em;
@@ -88,7 +69,7 @@
         font-size: 85%;
         background-color: rgba(0, 0, 0, 0.04);
         border-radius: 3px;
-        
+
         &:before, &:after {
             letter-spacing: -0.2em;
             content: "\00a0";

@@ -11,15 +11,15 @@
     <meta name="viewport" content="initial-scale=1.0, minimun-scale=1.0, width=device-width" />
     <meta name="description" content="<%- desc %>" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    
+
     <!-- Feeds -->
     <link rel="alternate" type="application/rss+xml" href="http://feed43.com/4824306380765877.xml" />
-    
+
     <!-- FB -->
     <meta name="og:image" content="<%- siteurl %><%- image.substr(1) %>" />
     <meta name="og:decscription" content="<%- share %>" />
     <meta property="fb:admins" content="100000475343767" />
-    
+
     <!-- Twitter -->
     <meta name="twitter:card" content="photo">
     <meta name="twitter:creator" content="@luotojesse">
@@ -39,14 +39,14 @@
         </div>
       </div>
     </div>
-    
+
     <div class="container">
         <div class="first-pagination">
             <ul class="pager">
-                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/<%= folder %>/1" rel="first"<% } %>><span class="glyphicon glyphicon-step-backward"></span> First</a></li>
-                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/<%= folder %>/<%- id-1 %>" rel="prev"<% } %>><span class="glyphicon glyphicon-chevron-left"></span> Prev</a></li>
-                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/<%= folder %>/<%- id+1 %>" rel="next"<% } %>>Next <span class="glyphicon glyphicon-chevron-right"></span></a></li>
-                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/<%= folder %>/<%- lastid %>" rel="last"<% } %>>Last <span class="glyphicon glyphicon-step-forward"></span></a></li>
+                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/<%= folder %>/1" rel="first"<% } %>> First</a></li>
+                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/<%= folder %>/<%- id-1 %>" rel="prev"<% } %>> Prev</a></li>
+                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/<%= folder %>/<%- id+1 %>" rel="next"<% } %>>Next </a></li>
+                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/<%= folder %>/<%- lastid %>" rel="last"<% } %>>Last </a></li>
             </ul>
         </div>
         <div class="content">
@@ -68,18 +68,18 @@
         </div>
         <div class="last-pagination">
             <ul class="pager">
-                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/<%= folder %>/1" rel="first"<% } %>><span class="glyphicon glyphicon-step-backward"></span> First</a></li>
-                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/<%= folder %>/<%- id-1 %>" rel="prev"<% } %>><span class="glyphicon glyphicon-chevron-left"></span> Prev</a></li>
-                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/<%= folder %>/<%- id+1 %>" rel="next"<% } %>>Next <span class="glyphicon glyphicon-chevron-right"></span></a></li>
-                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/<%= folder %>/<%- lastid %>" rel="last"<% } %>>Last <span class="glyphicon glyphicon-step-forward"></span></a></li>
+                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/<%= folder %>/1" rel="first"<% } %>> First</a></li>
+                <li<% if(isFirst) { %> class="disabled"<% } %>><a<% if(!isFirst) { %> href="/<%= folder %>/<%- id-1 %>" rel="prev"<% } %>> Prev</a></li>
+                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/<%= folder %>/<%- id+1 %>" rel="next"<% } %>>Next </a></li>
+                <li<% if(isLast) { %> class="disabled"<% } %>><a<% if(!isLast) { %> href="/<%= folder %>/<%- lastid %>" rel="last"<% } %>>Last </a></li>
             </ul>
         </div>
-        
-        
+
+
         <footer>
             <div class="row">
                 <div class="col-md-12">
-                    
+
                     <ul class="list-unstyled">
                       <li class="pull-right"><a href="#">Back to top</a></li>
                       <li><a href="/blog">Blog</a></li>
@@ -87,7 +87,7 @@
                       <li><a href="http://feed43.com/4824306380765877.xml">RSS</a></li>
                       <li><a href="https://github.com/jehna/grunt-gae-bootstrap-webcomic" rel="nofollow">Fork!</a></li>
                     </ul>
-                    
+
                     <p>Site by <a href="https://www.twitter.com/luotojesse">Jesse Luoto.</a></p>
                     <p><br></p>
                     <p>This work is licensed under a Creative Commons Attribution-NonCommercial 2.5 License.</p>
@@ -100,17 +100,17 @@
             </div>
         </footer>
     </div>
-    
-    
+
+
     <!-- GA -->
     <script>
     var galite = galite || {};
     galite.UA = 'UA-31498696-2';
-    
+
     (function(window, localStorage, navigator, screen, document, encodeURIComponent) {
         window.addEventListener('load', function() {
             var pageLoadedTimestamp = new Date().getTime();
-            
+
             window.galite = window.galite || {};
             var req = new XMLHttpRequest();
             var urlBase = (
@@ -122,7 +122,7 @@
                 '&ul=en-us' +
                 '&de=UTF-8'
             );
-            
+
             var getOptionalStr = function(values) {
                 var str = '';
                 for (var i in values) {
@@ -133,7 +133,7 @@
                 }
                 return str;
             };
-            
+
             var optional = {
                 'dt': [document.title],
                 'sd': [screen.colorDepth, '-bit'],
@@ -170,10 +170,10 @@
                     );
                 };
             };
-            
+
             // Deplay the page load event by 100ms
             setTimeout(eventBuilder('pageview'), 100);
-            
+
             /**
              * Note:
              * unload event does not fire on:

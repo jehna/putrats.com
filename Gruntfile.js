@@ -89,7 +89,7 @@ module.exports = function(grunt) {
                     }
                 ]
             }
-        },     
+        },
         highlight: {
             task: {
                 options: {
@@ -152,9 +152,9 @@ module.exports = function(grunt) {
         clean: {
             tmp: ['tmp/'],
             css: ['static/css']
-        } 
+        }
     });
-  
+
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-template');
@@ -168,12 +168,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-text-replace');
     grunt.loadNpmTasks('grunt-font-optimizer');
-    
+
     grunt.registerTask('build', 'build all files', function() {
         var pkg = grunt.file.readJSON('package.json');
-        
+
         function compileFolder(expandFolder) {
-            
+
             grunt.file.expand(expandFolder)
             .map(function(file) {
                 conf = grunt.file.readJSON(file);
@@ -190,30 +190,30 @@ module.exports = function(grunt) {
                 conf.lastid = a[a.length-1].id;
                 conf.blogPost = false;
                 conf.folder = (conf.isBlogPost == true) ? "blog" : "comics";
-                
+
                 if (conf.isBlogPost) {
                     var compiledMdFileName = "tmp/markdown/" + conf.id + ".html";
                     if(grunt.file.exists(compiledMdFileName)) {
                         conf.blogPost = grunt.file.read(compiledMdFileName)
                     }
                 }
-                
-                
+
+
                 var filename = "static/" + conf.folder + "/" + conf.id + "/index.html";
                 var files = {}
                 files[filename] = ['templates/template.html'];
-                
+
                 grunt.config('template.'+conf.folder + conf.id+'.options.data', conf);
                 grunt.config('template.'+conf.folder + conf.id+'.files', files);
-                
-                
+
+
                 if (conf.isLast) {
                     var lastFolderFile = {}
                     lastFolderFile["static/" + conf.folder + "/index.html"] = ['templates/template.html'];
-                    
+
                     grunt.config('template.last'+conf.folder+'.options.data', conf);
                     grunt.config('template.last'+conf.folder+'.files', lastFolderFile);
-                    
+
                     if (conf.isBlogPost) {
                         var lastFile = {"static/index.html": ['templates/template.html']}
                         grunt.config('template.last.options.data', conf);
@@ -221,20 +221,20 @@ module.exports = function(grunt) {
                     }
                 }
             });
-            
+
         }
-        
+
         compileFolder("comics/*.json");
         compileFolder("src/blog/*.json");
-        
+
         grunt.task.run(['template']);
         grunt.task.run(['htmlmin']);
         grunt.task.run(['sitemap']);
         grunt.task.run(['robotstxt']);
     });
-    
-    
+
+
     grunt.registerTask('default', ['less', 'markdown', 'build', 'clean:tmp', 'font_optimizer', 'watch']);
-    grunt.registerTask('deploy', ['less', 'markdown', 'build', 'uncss', 'cssmin', 'imagemin', 'replace', 'font_optimizer', 'clean']);
+    grunt.registerTask('deploy', ['less', 'markdown', 'build', 'uncss', 'cssmin'/*, 'imagemin'*/, 'replace', 'font_optimizer', 'clean']);
 
 };

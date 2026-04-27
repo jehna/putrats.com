@@ -9,7 +9,7 @@
     "watch": "tsx watch --clear-screen=false --include 'comics/**' --include 'public/**' --include 'src/build/**' src/build/generate-pages.ts",
     "dev": "npm run build && (npm run watch & serve dist)"
   },
-  "homepage": "https://putrats.com/",
+  "homepage": "https://putrats.thejunkland.com/",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^25.6.0",

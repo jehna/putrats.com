@@ -1,4 +1,4 @@
 
-Sitemap: http://putrats.com/sitemap.xml
+Sitemap: https://putrats.thejunkland.com/sitemap.xml
 Crawl-delay: 100
-Host: http://putrats.com/
+Host: https://putrats.thejunkland.com/

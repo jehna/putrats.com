@@ -8,7 +8,7 @@ const ROOT = resolve(import.meta.dirname, "..", "..");
 const COMICS_DIR = resolve(ROOT, "comics");
 const PUBLIC_DIR = resolve(ROOT, "public");
 const DIST_DIR = resolve(ROOT, "dist");
-const SITE_URL = "https://putrats.com/";
+const SITE_URL = "https://putrats.thejunkland.com/";
 
 function loadComics(): Comic[] {
   const files = readdirSync(COMICS_DIR).filter((f) => f.endsWith(".json"));

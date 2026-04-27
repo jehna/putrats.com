@@ -1,4 +1,4 @@
-# putrats.com
+# putrats.thejunkland.com
 
 > A small webcomic — *Stories about the mind of a startup dev.*
 

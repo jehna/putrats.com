@@ -1,29 +1,20 @@
 {
-  "name": "webcomic-grunt",
-  "version": "1.0.0",
-  "description": "Webcomic static Grunt project",
-  "main": "index.js",
+  "name": "putrats",
+  "version": "2.0.0",
+  "description": "Putrats webcomic — static site",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsx src/build/generate-pages.ts",
+    "watch": "tsx watch --clear-screen=false --include 'comics/**' --include 'public/**' --include 'src/build/**' src/build/generate-pages.ts",
+    "dev": "npm run build && (npm run watch & serve dist)"
   },
-  "author": "",
-  "license": "ISC",
+  "homepage": "https://putrats.com/",
+  "license": "MIT",
   "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-contrib-less": "~0.11.1",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-template": "~0.2.3",
-    "grunt-html-minify": "~0.3.1",
-    "grunt-contrib-imagemin": "~0.7.1",
-    "imagesize": "~1.0.0",
-    "gm": "~1.16.0",
-    "grunt-uncss": "~0.3.4",
-    "grunt-contrib-htmlmin": "~0.3.0",
-    "grunt-contrib-cssmin": "~0.9.0",
-    "grunt-sitemap": "~1.1.0",
-    "grunt-robots-txt": "~0.3.0",
-    "grunt-markdown": "~0.6.1",
-    "grunt-contrib-clean": "~0.6.0"
-  },
-  "homepage": "http://putrats.com/"
+    "@types/node": "^25.6.0",
+    "serve": "^14.2.6",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3"
+  }
 }

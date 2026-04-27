@@ -1,3 +1,4 @@
 node_modules
 *.komodoproject
 comics/drafts
+dist
